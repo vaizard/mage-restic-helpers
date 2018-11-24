@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+databases=`/usr/bin/mysql -e "SHOW DATABASES;" | grep -Ev "^(Database|mysql|sys|information_schema|performance_schema)$"`
+for db in $databases; do
+/usr/bin/mysqldump --single-transaction --triggers --events --routines --master-data=2 --databases --databases $db | /usr/local/bin/restic backup ${1} --stdin --stdin-filename $db.sql
+done
