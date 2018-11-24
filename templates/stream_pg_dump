@@ -1,0 +1,9 @@
+
+#!/usr/bin/env bash
+databases=`psql -l | awk '{ print $1}' | sed '/^|/ d' | sed '1,3d' | head -n -2 | grep -Ev "^(postgres|template0|template1)$"`
+for db in $databases; do
+pg_dump --dbname="${db}" | restic backup --stdin --stdin-filename pg_${db}.sql ${1}
+done
+
+# NOTE that stream_pg_dump expects to be run as the postgres user. On shell, 
+# you can do this with su -c "./stream_pg_dump" postgres
