@@ -1,0 +1,10 @@
+---
+
+- name: "Ensure target directory is present"
+  file: path=/opt/restic-helpers state=directory
+
+- name: "Ensure helper files are installed"
+  template: src="{{ item }}" dest="/opt/restic-helpers/{{ item }}" mode=0755
+  with_items:
+    - "stream_mysqldump"
+    - "stream_pg_dump"
