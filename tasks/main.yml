@@ -8,3 +8,8 @@
   with_items:
     - "stream_mysqldump"
     - "stream_pg_dump"
+
+- name: "Install optional packages"
+  apt:
+    name: "{{ restic_helpers_opt_packages }}"
+    state: present

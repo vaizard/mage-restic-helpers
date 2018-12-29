@@ -1,0 +1,4 @@
+---
+restic_helpers_opt_packages:
+  - sshfs
+  - fuse
