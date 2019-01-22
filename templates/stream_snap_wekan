@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+pushd /var/snap/wekan/common/db-backups
+version=$(snap list | grep wekan | awk -F ' ' '{print $3}')
+dump=$"/snap/wekan/$version/bin/mongodump"
+pushd /var/snap/wekan/common/db-backups
+$dump --port 27019
+/snap/bin/wekan.database-backup /var/snap/wekan/common/db-backups/dump/wekan.backup
+popd
+restic backup /var/snap/wekan/common/db-backups/dump ${1}
