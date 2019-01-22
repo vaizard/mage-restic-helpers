@@ -8,6 +8,7 @@
   with_items:
     - "stream_mysqldump"
     - "stream_pg_dump"
+    - "stream_snap_wekan"
 
 - name: "Install optional packages"
   apt:
